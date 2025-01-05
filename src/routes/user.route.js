@@ -10,3 +10,10 @@ router.post("/register" , registerUser);
 
 // to login the user;
 router.post("/login" , loginUser);
+
+
+// to logout the user;
+router.get("/logout" , logoutUser);
+
+// to refresh token;
+router.post("/refreshToken" , refreshToken);
