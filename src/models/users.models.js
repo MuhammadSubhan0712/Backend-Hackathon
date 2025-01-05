@@ -13,6 +13,13 @@ const UsersSchema = new mongoose.Schema({
   },
 });
 
+UsersSchema.pre("save", async function (next) {
+    if (!this.isModified("password")) {
+      next();
+      return;
+    }
+    this.password = await bcrypt.hash(this.password, 10);
+  });
 
 export default mongoose.model("Users", UsersSchema);
 
