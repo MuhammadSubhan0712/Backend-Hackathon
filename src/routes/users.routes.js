@@ -16,3 +16,33 @@ const generateRefreshToken = (user) => {
     expiresIn: "7d",
   });
 };
+
+
+// To register the User
+const registerUser = async (req, res) => {
+    const { email, password } = req.body;
+  
+    if (!email || !password) {
+      res.status(400).json({
+        message: "You must enter email & password",
+      });
+      return;
+    }
+  
+    const user = await User.findOne({ email: email });
+    if (user) {
+      res.status(401).json({
+        message: "User Already Exist",
+      });
+    }
+  
+    const createUser = await User.create({
+      email,
+      password,
+    });
+    res.json({
+      message: "User Registered Successfully",
+      data: createUser,
+    });
+  };
+  
