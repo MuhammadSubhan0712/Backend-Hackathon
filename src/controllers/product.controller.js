@@ -3,7 +3,6 @@ import Products from "../models/product.model.js";
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
 
-
 // cloudinary configuration
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -28,7 +27,7 @@ const uploadImageToCloudinary = async (localpath) => {
       error,
     });
     if (fs.existsSync(localpath)) {
-      fs.unlinkSync(localpath); 
+      fs.unlinkSync(localpath);
     }
     return null;
   }
@@ -61,22 +60,25 @@ export const uploadImage = async (req, res) => {
 
 // Add Product
 export const addProduct = async (req, res) => {
+  const { name, description, price } = req.body;
 
-  
-  const { name, description, price , userid , image } = req.body;
-
-  if (!name ||!description ||!price ||!userid) {
+  if (!name || !description || !price) {
     res.status(400).json({
       message: "You must enter all fields",
     });
     return;
   }
   try {
-    const product = await Products.create({ userid , name, description, price , image });
+    const product = await Products.create({
+      userid: req.user.id,
+      name,
+      description,
+      price,
+    });
     res.status(200).json({
       message: "Product add successfully",
       product,
-      User_id:userid,
+      User_id: req.user.id,
     });
   } catch (error) {
     console.log(error);
@@ -141,7 +143,7 @@ export const updateSingleProduct = async (req, res) => {
       { name, description, price },
       { new: true }
     );
-    if (!name || !description || !price ) {
+    if (!name || !description || !price) {
       res.status(400).json({
         message: "You must enter all fields",
       });

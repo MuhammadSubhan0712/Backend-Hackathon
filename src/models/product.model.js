@@ -15,22 +15,24 @@ const productSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    // image: {
-    //   type: String,
-    //   required: true,
-    // },
+    image: {
+      type: String,
+      // required: true,
+    },
     user: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Users",
-        required: true,
+        // required: true,
       },
     ],
-    orderItems: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Orders",
-      // required: true,
-    }],
+    orderItems: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Orders",
+        // required: true,
+      },
+    ],
   },
   { timeStamps: true }
 );
