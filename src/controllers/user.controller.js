@@ -160,4 +160,4 @@ const refreshToken = async (req, res) => {
   }
 };
 
-export { registerUser, refreshToken, loginUser, logoutUser, sendEmail };
+export { registerUser, refreshToken, loginUser, logoutUser };

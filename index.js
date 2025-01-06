@@ -3,7 +3,9 @@ import dotenv from "dotenv";
 import cors from "cors";
 import connectDB from "./src/db/index.js";
 import userRouter from "./src/routes/user.route.js"
-import { sendEmail } from "./src/controllers/node.controller.js";
+import productRouter from "./src/routes/product.route.js";
+import orderRouter from "./src/routes/order.route.js";
+
 dotenv.config();
 const app = express();
 
@@ -18,7 +20,8 @@ app.get("/", (req, res) => {
 
 
 app.use("/api/v1" , userRouter);
-app.get("/sendemail", sendEmail);
+app.use("/api/v1" , productRouter);
+app.use("/api/v1" , orderRouter);
 
 connectDB()
   .then(() => {

@@ -1,5 +1,6 @@
 import { timeStamp } from "console";
 import mongoose from "mongoose";
+import { type } from "os";
 
 const orderSchema = new mongoose.Schema({
   user: [
@@ -24,7 +25,8 @@ const orderSchema = new mongoose.Schema({
     required: true,
   },
   orderDate: {
-    timestamps: true,
+    type:Date,
+    createdAt: Date.now()
   },
   status: {
     type: String,

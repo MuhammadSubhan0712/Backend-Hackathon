@@ -8,6 +8,7 @@ import {
   updateSingleProduct,
   uploadImage,
 } from "../controllers/product.controller.js";
+import {upload} from "../middleware/multer.middleware.js"
 
 const router = express.Router();
 
