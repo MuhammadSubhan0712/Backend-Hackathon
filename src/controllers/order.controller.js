@@ -12,9 +12,8 @@ export const addOrder = async (req , res) => {
       return;
     }
     const order = await Orders.create({
-        fullname,
-        email,
-        enrolledCourse,
+        products,
+        price,
       });
     
       const product = await Products.findByIdAndUpdate(name, {
@@ -39,7 +38,7 @@ export const getAllOrders = async (req , res ) => {
       }
 }
 
-export const getSingleOrder = async (req , res ) => {
+export const getSingleOrder = async ( req , res ) => {
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {

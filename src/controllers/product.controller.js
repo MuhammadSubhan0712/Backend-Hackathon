@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import Products from "../models/product.model.js";
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
-import multer from "multer";
+
 
 // cloudinary configuration
 cloudinary.config({
@@ -28,7 +28,7 @@ const uploadImageToCloudinary = async (localpath) => {
       error,
     });
     if (fs.existsSync(localpath)) {
-      fs.unlinkSync(localpath); // Ensure file is deleted in case of error
+      fs.unlinkSync(localpath); 
     }
     return null;
   }
@@ -61,9 +61,11 @@ export const uploadImage = async (req, res) => {
 
 // Add Product
 export const addProduct = async (req, res) => {
-  const { name, description, price, image } = req.body;
 
-  if (!name || !description || !price ) {
+  
+  const { name, description, price , id } = req.body;
+
+  if (!name ||!description ||!price ||!id) {
     res.status(400).json({
       message: "You must enter all fields",
     });
@@ -74,9 +76,11 @@ export const addProduct = async (req, res) => {
     res.status(200).json({
       message: "Product add successfully",
       product,
+      authorId:id,
     });
   } catch (error) {
-    res.json({ message: "Error adding product" }, error);
+    console.log(error);
+    res.status(400).json({ message: "Error adding product" }, error);
   }
 };
 
@@ -134,10 +138,10 @@ export const updateSingleProduct = async (req, res) => {
   try {
     const updateProduct = await Products.findByIdAndUpdate(
       id,
-      { name, description, price, image },
+      { name, description, price },
       { new: true }
     );
-    if (!name || !description || !price || !image) {
+    if (!name || !description || !price ) {
       res.status(400).json({
         message: "You must enter all fields",
       });

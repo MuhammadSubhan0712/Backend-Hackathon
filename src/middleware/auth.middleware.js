@@ -1,4 +1,3 @@
-import { error } from "console";
 import jwt from "jsonwebtoken";
 
 const authenticateUser = async (res, req, next) => {

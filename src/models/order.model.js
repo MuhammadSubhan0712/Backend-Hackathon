@@ -1,6 +1,5 @@
-import { timeStamp } from "console";
 import mongoose from "mongoose";
-import { type } from "os";
+
 
 const orderSchema = new mongoose.Schema({
   user: [
@@ -18,7 +17,6 @@ const orderSchema = new mongoose.Schema({
       required: true,
     },
   ],
-
   totalPrice: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Products",
@@ -26,7 +24,7 @@ const orderSchema = new mongoose.Schema({
   },
   orderDate: {
     type:Date,
-    createdAt: Date.now()
+    default: Date.now
   },
   status: {
     type: String,

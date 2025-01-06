@@ -36,40 +36,44 @@ const registerUser = async (req, res) => {
     });
   }
 
-  const createUser = await User.create({
-    email,
-    password,
-  });
-  res.json({
-    message: "User Registered Successfully",
-    data: createUser,
-  });
-
-
- const sendEmail = async (req, res) => {
-let testAccount = await nodemailer.createTestAccount();
-
-const transporter = await nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
-    secure:false,
-    auth: {
-        user: 'howell.muller60@ethereal.email',
-        pass: 'ApebtNCsj13G6JcQ3H'
-    }
-});
-
-    const info = await transporter.sendMail({
-      from: '"😊 Howell Muller " <howell.muller60@ethereal.email>',
-      to: "muhammadsubhan0712@gmail.com", 
-      subject: "Welcome",
-      text: "Welcome to the HACKATHON",
-      html: "<b>Hello Hackathon</b>", 
+  try {
+    const createUser = await User.create({
+      username,
+      email,
+      password,
     });
-  
-    console.log("Message sent: %s", info.messageId);
-    res.send("email sent" , info);
-  };
+    res.json({
+      message: "User Registered Successfully",
+      data: createUser,
+    });
+
+    const sendEmail = async (req, res) => {
+      let testAccount = await nodemailer.createTestAccount();
+      
+      const transporter = await nodemailer.createTransport({
+          host: 'smtp.ethereal.email',
+          port: 587,
+          secure:false,
+          auth: {
+              user: 'kyra.robel79@ethereal.email',
+              pass: 'Kg3HdJB3xnmVb5VcK2'
+          }
+      });
+      
+          const info = await transporter.sendMail({
+            from: '"😊 Kyra Robel " <kyra.robel79@ethereal.email>',
+            to: "muhammadsubhan0712@gmail.com", 
+            subject: "Welcome",
+            text: "Welcome to the HACKATHON",
+            html: "<b>Hello Hackathon</b>", 
+          });
+        
+          console.log("Message sent: %s", info.messageId);
+          res.send("email sent" , info);
+        };
+  } catch (error) {
+    res.json({message:"Error creating user"},error);
+  } 
 };
 
 // To Login User
