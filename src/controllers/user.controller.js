@@ -1,7 +1,6 @@
 import User from "../models/user.models.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { upload } from "../middleware/multer.middleware.js";
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
 
@@ -78,11 +77,11 @@ const generateRefreshToken = (user) => {
 
 // To register the User
 const registerUser = async (req, res) => {
-  const { email, password } = req.body;
+  const { username , email, password } = req.body;
 
-  if (!email || !password) {
+  if (!username || !email || !password) {
     res.status(400).json({
-      message: "You must enter email & password",
+      message: "You must enter username email & password",
     });
     return;
   }
