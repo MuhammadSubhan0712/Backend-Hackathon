@@ -2,12 +2,12 @@ This project is a RESTful API for managing ecommerce products. It includes funct
 
 Development Features:
 
-**** Users ****:
+🧔 Users 🧑
 Register a User: Allows users to register with their credentials in encrypted form and then welcome email will be send through node mailer.
 
 Login a User: Allows users to login with their credentials and then their session tokens will generate.
 
-**** Products ****:
+🏬 Products 🏬
 Add a Product: Allows users to add a product with an image.
 
 Upload Image: Handles image uploads to Cloudinary.
@@ -20,7 +20,7 @@ Update Product: Updates a product’s details by ID.
 
 Delete Product: Deletes a product by ID.
 
-**** Orders ****:
+🛒 Orders 🧾
 
 Add a Order: Allows users to add a order with authorised ID.
 
