@@ -32,9 +32,13 @@ export const addOrder = async (req , res) => {
     });
       res.status(200).json({
         message: "order added successfully",
+        order,
       });
     } catch (error) {
-      
+      res.status(400).json({
+        message: "Error adding order",
+        error,
+    });
     }
     
     };
