@@ -8,24 +8,24 @@ import {
   updateSingleProduct,
   uploadImage,
 } from "../controllers/product.controller.js";
-import {upload} from "../middleware/multer.middleware.js"
+import { upload } from "../middleware/multer.middleware.js";
 
 const router = express.Router();
 
 // To add product
-router.post("/addproduct", addProduct);
+router.post("/product", addProduct);
 
 // To get all products
-router.get("/allproducts", getAllProducts);
+router.get("/products", getAllProducts);
 
 // To get single product
-router.get("/singleproduct/:id", getSingleProduct);
+router.get("/products/:id", getSingleProduct);
 
 // To update single product
-router.put("/editproduct/:id", updateSingleProduct);
+router.put("/products/:id", updateSingleProduct);
 
 // To delete single product
-router.delete("/deleteproduct/:id", deleteSingleProduct);
+router.delete("/products/:id", deleteSingleProduct);
 
 // To upload image
 router.post("/uploadimage", upload.single("image", uploadImage));
