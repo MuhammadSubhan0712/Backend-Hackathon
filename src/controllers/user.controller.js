@@ -17,15 +17,20 @@ const uploadImageToCloudinary = async (localpath) => {
     const uploadResult = await cloudinary.uploader.upload(localpath, {
       resource_type: "auto",
     });
-    fs.unlinkSync(localpath);
+    if (fs.existsSync(localpath)) {
+      fs.unlinkSync(localpath); 
+    }
     return uploadResult.url;
-  } catch (error) {
-    console.log(error);
-    res.status(400).json({
-      message: "Error Occured ==>",
-      error,
-    });
-    fs.unlinkSync(localpath);
+  } 
+  catch (error) {
+    console.log("Error Occured",error);
+    // res.status(400).json({
+    //   message: "Error Occured ==>",
+    //   error,
+    // });
+    if (fs.existsSync(localpath)) {
+      fs.unlinkSync(localpath); // Ensure file is deleted in case of error
+    }
     return null;
   }
 };
