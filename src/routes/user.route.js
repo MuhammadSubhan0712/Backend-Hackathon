@@ -25,8 +25,4 @@ router.get("/logout", logoutUser);
 router.post("/refreshToken", refreshToken);
 
 
-// To upload image
-router.post("/uploadimage" , upload.single("image" , uploadImage));
-
-
 export default router;

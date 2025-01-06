@@ -1,6 +1,65 @@
 import mongoose from "mongoose";
 import Products from "../models/product.model.js";
+import { v2 as cloudinary } from "cloudinary";
+import fs from "fs";
+import multer from "multer";
 
+// cloudinary configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+});
+
+// To upload image
+const uploadImageToCloudinary = async (localpath) => {
+  try {
+    const uploadResult = await cloudinary.uploader.upload(localpath, {
+      resource_type: "auto",
+    });
+    if (fs.existsSync(localpath)) {
+      fs.unlinkSync(localpath);
+    }
+    return uploadResult.url;
+  } catch (error) {
+    console.log("Error Occured", error);
+    res.status(400).json({
+      message: "Error Occured ==>",
+      error,
+    });
+    if (fs.existsSync(localpath)) {
+      fs.unlinkSync(localpath); // Ensure file is deleted in case of error
+    }
+    return null;
+  }
+};
+
+export const uploadImage = async (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({
+      message: "No image file uploaded",
+    });
+  }
+
+  try {
+    const uploadResult = await uploadImageToCloudinary(req.file.path);
+
+    if (!uploadResult) {
+      return res.status(500).json({
+        message: "Error occured while uploading image",
+      });
+    }
+    res.json({
+      message: "Image Uploaded Successfully",
+      url: uploadResult,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Error Occured while uploading image" });
+  }
+};
+
+// Add Product
 export const addProduct = async (req, res) => {
   const { name, description, price, image } = req.body;
 
@@ -21,6 +80,8 @@ export const addProduct = async (req, res) => {
   }
 };
 
+// Get all Products
+
 export const getAllProducts = async (req, res) => {
   const page = req.query.page || 1;
   const limit = req.query.limit || 10;
@@ -37,6 +98,9 @@ export const getAllProducts = async (req, res) => {
     res.json({ message: "Error getting products" }, error);
   }
 };
+
+// Get single Product
+
 export const getSingleProduct = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -57,6 +121,8 @@ export const getSingleProduct = async (req, res) => {
     res.json({ message: "Error getting product" }, error);
   }
 };
+
+// Edit single Product
 
 export const updateSingleProduct = async (req, res) => {
   const { id } = req.params;
@@ -86,6 +152,8 @@ export const updateSingleProduct = async (req, res) => {
     res.json({ message: "Error updating product" }, error);
   }
 };
+
+// Delete single Product
 
 export const deleteSingleProduct = async (req, res) => {
   const { id } = req.params;

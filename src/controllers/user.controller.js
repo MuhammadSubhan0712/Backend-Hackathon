@@ -1,64 +1,7 @@
 import User from "../models/user.models.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { v2 as cloudinary } from "cloudinary";
-import fs from "fs";
-
-// cloudinary configuration
-cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.API_KEY,
-  api_secret: process.env.API_SECRET,
-});
-
-// To upload image
-const uploadImageToCloudinary = async (localpath) => {
-  try {
-    const uploadResult = await cloudinary.uploader.upload(localpath, {
-      resource_type: "auto",
-    });
-    if (fs.existsSync(localpath)) {
-      fs.unlinkSync(localpath); 
-    }
-    return uploadResult.url;
-  } 
-  catch (error) {
-    console.log("Error Occured",error);
-    res.status(400).json({
-      message: "Error Occured ==>",
-      error,
-    });
-    if (fs.existsSync(localpath)) {
-      fs.unlinkSync(localpath); // Ensure file is deleted in case of error
-    }
-    return null;
-  }
-};
-
-const uploadImage = async (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({
-      message: "No image file uploaded",
-    });
-  }
-
-  try {
-    const uploadResult = await uploadImageToCloudinary(req.file.path);
-
-    if (!uploadResult) {
-      return res.status(500).json({
-        message: "Error occured while uploading image",
-      });
-    }
-    res.json({
-      message: "Image Uploaded Successfully",
-      url: uploadResult,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Error Occured while uploading image" });
-  }
-};
+import nodemailer from "nodemailer";
 
 // To generate access token
 const generateAccessToken = (user) => {
@@ -101,6 +44,32 @@ const registerUser = async (req, res) => {
     message: "User Registered Successfully",
     data: createUser,
   });
+
+
+ const sendEmail = async (req, res) => {
+let testAccount = await nodemailer.createTestAccount();
+
+const transporter = await nodemailer.createTransport({
+    host: 'smtp.ethereal.email',
+    port: 587,
+    secure:false,
+    auth: {
+        user: 'howell.muller60@ethereal.email',
+        pass: 'ApebtNCsj13G6JcQ3H'
+    }
+});
+
+    const info = await transporter.sendMail({
+      from: '"😊 Howell Muller " <howell.muller60@ethereal.email>',
+      to: "muhammadsubhan0712@gmail.com", 
+      subject: "Welcome",
+      text: "Welcome to the HACKATHON",
+      html: "<b>Hello Hackathon</b>", 
+    });
+  
+    console.log("Message sent: %s", info.messageId);
+    res.send("email sent" , info);
+  };
 };
 
 // To Login User
@@ -191,4 +160,4 @@ const refreshToken = async (req, res) => {
   }
 };
 
-export { registerUser, refreshToken, loginUser, logoutUser, uploadImage };
+export { registerUser, refreshToken, loginUser, logoutUser, sendEmail };
