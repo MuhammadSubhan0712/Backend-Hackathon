@@ -1,6 +1,7 @@
 import User from "../models/user.models.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import { upload } from "../middleware/multer.middleware.js";
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
 
@@ -24,10 +25,10 @@ const uploadImageToCloudinary = async (localpath) => {
   } 
   catch (error) {
     console.log("Error Occured",error);
-    // res.status(400).json({
-    //   message: "Error Occured ==>",
-    //   error,
-    // });
+    res.status(400).json({
+      message: "Error Occured ==>",
+      error,
+    });
     if (fs.existsSync(localpath)) {
       fs.unlinkSync(localpath); // Ensure file is deleted in case of error
     }
