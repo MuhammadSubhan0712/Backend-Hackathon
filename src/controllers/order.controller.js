@@ -64,16 +64,16 @@ export const getSingleOrder = async ( req , res ) => {
     }
   
     try {
-      const singleOrder = await Orders.findbyId(id);
+      const singleOrder = await Orders.findbyId(id).populate("product" , "name" , "price");
       if (!singleOrder) {
-        res.status(400).json({
+        res.status(404).json({
           message: "No order found",
         });
         return;
       }
       res.status(200).json({
         message: "Your single order =>",
-        singleOrder,
+        data:singleOrder,
       });
     } catch (error) {
       res.status(400).json({
