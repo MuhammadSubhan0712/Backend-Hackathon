@@ -63,20 +63,20 @@ export const uploadImage = async (req, res) => {
 export const addProduct = async (req, res) => {
 
   
-  const { name, description, price , id } = req.body;
+  const { name, description, price , userid , image } = req.body;
 
-  if (!name ||!description ||!price ||!id) {
+  if (!name ||!description ||!price ||!userid) {
     res.status(400).json({
       message: "You must enter all fields",
     });
     return;
   }
   try {
-    const product = await Products.create({ name, description, price });
+    const product = await Products.create({ userid , name, description, price , image });
     res.status(200).json({
       message: "Product add successfully",
       product,
-      authorId:id,
+      User_id:userid,
     });
   } catch (error) {
     console.log(error);

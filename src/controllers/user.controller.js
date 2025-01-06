@@ -106,7 +106,7 @@ const loginUser = async (req, res) => {
     });
     return;
   }
-
+  try {
   // Cookies
   res.cookie("refreshToken", refreshToken, { http: true, secure: false });
   res.status(200).json({
@@ -115,6 +115,11 @@ const loginUser = async (req, res) => {
     refreshToken: generateRefreshToken(user),
     data: user,
   });
+  } catch (error) {
+    res.json({message:"Error logging user"},error);
+  }
+
+
 };
 
 // To logout user

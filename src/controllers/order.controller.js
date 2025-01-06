@@ -3,26 +3,40 @@ import Products from "../models/product.model.js"
 
 
 export const addOrder = async (req , res) => {
-    const { products , price  } = req.body;
+    const { products  } = req.body;
 
-    if (!products || !price) {
+    if (!products || !Array.isArray(product) ||product.length === 0) {
       res.status(400).json({
-        message: "product and price is required",
+        message: "product array is required",
       });
       return;
     }
-    const order = await Orders.create({
+    try {
+      
+      const productDetails = await Products.find({_id : { $in: products }});
+    
+      if (productDetails.length !== products.length) {
+       res.status(404).json({
+            message: "One or more products not found."
+        });
+        return;
+    }
+
+      //  calculating total price
+      const totalPrice = productDetails.reduce((sum , product) => sum + product.price , 0);
+      
+      const order = await Orders.create({
         products,
-        price,
-      });
-    
-      const product = await Products.findByIdAndUpdate(name, {
-        $push: { name: order._id },
-      });
-    
+        price: totalPrice,
+        user: req.user.id
+    });
       res.status(200).json({
         message: "order added successfully",
       });
+    } catch (error) {
+      
+    }
+    
     };
 
 export const getAllOrders = async (req , res ) => {
