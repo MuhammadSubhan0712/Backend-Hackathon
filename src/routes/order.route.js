@@ -9,12 +9,12 @@ import {
 const router = express.Router();
 
 // To add order
-router.post("/addorder", addOrder);
+router.post("/orders", addOrder);
 
 // To get all orders
-router.get("/allorders", getAllOrders);
+router.get("/orders", getAllOrders);
 
 // To get single order
-router.get("/singleorder/:id", getSingleOrder);
+router.get("/orders/:id", getSingleOrder);
 
 export default router;

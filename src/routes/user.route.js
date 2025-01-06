@@ -9,6 +9,7 @@ import {
 
 const router = express.Router();
 
+
 // to register the user;
 router.post("/auth/register", registerUser);
 
