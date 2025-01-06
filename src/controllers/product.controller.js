@@ -60,7 +60,7 @@ export const uploadImage = async (req, res) => {
 
 // Add Product
 export const addProduct = async (req, res) => {
-  const { name, description, price } = req.body;
+  const { name, description, price, image } = req.body;
 
   if (!name || !description || !price) {
     res.status(400).json({
@@ -74,6 +74,7 @@ export const addProduct = async (req, res) => {
       name,
       description,
       price,
+      image,
     });
     res.status(200).json({
       message: "Product add successfully",
@@ -136,7 +137,7 @@ export const updateSingleProduct = async (req, res) => {
     res.status(400).json({ message: "Invalid ID" });
     return;
   }
-
+  const { name, description, price } = req.body;
   try {
     const updateProduct = await Products.findByIdAndUpdate(
       id,

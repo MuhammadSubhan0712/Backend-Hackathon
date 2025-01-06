@@ -3,8 +3,6 @@ import express from "express";
 import {
   registerUser,
   loginUser,
-  logoutUser,
-  refreshToken,
 } from "../controllers/user.controller.js";
 
 const router = express.Router();
