@@ -21,6 +21,6 @@ const Register = () => {
       </p>
     </div>
   );
-}
+};
 
 export default Register;
