@@ -1,4 +1,5 @@
-import { Input, Button } from "shadcn-ui";
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom";
 
 const Login = () => {

@@ -1,9 +1,11 @@
 /** @type {import('tailwindcss').Config} */
+const { shadcnPlugin } = require('shadcn-ui');
 export default {
     darkMode: ["class"],
     content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    'node_modules/shadcn-ui/components/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
   	extend: {
@@ -15,6 +17,8 @@ export default {
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
+			  xdGreen: '#00ff00',
+			  xdBlack: '#0f0f0f',
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
@@ -52,10 +56,15 @@ export default {
   				'3': 'hsl(var(--chart-3))',
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
-  			}
-  		}
+  			},
+			transitionProperty: {
+				  colors: "color",
+				  transform: "transform",
+		    }
+			
+		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"),shadcnPlugin()],
 }
 
