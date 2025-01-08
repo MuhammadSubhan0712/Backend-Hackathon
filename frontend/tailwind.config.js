@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const { shadcnPlugin } = require('shadcn-ui');
+
 export default {
     darkMode: ["class"],
     content: [
@@ -17,8 +17,8 @@ export default {
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
-			  xdGreen: '#00ff00',
-			  xdBlack: '#0f0f0f',
+			  xdYellow: '#FFFF00',
+			  xdCharcoal: '#404040',
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
@@ -65,6 +65,6 @@ export default {
 		}
   	}
   },
-  plugins: [require("tailwindcss-animate"),shadcnPlugin()],
+  plugins: [require("tailwindcss-animate")],
 }
 

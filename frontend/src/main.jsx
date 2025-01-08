@@ -1,8 +1,8 @@
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./App.jsx";
+import Home from "./Home.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Layout } from "lucide-react";
+import Layout from "./Layout.jsx";
 import Register from "./Pages/Register.jsx";
 import Login from "./Pages/Login.jsx";
 import Products from "./Pages/Products.jsx";
@@ -14,8 +14,8 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/",
-        element: <App />,
+        path: "",
+        element: <Home />,
       },
       {
         path: "/register",
@@ -46,5 +46,5 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router}></RouterProvider>
+  <RouterProvider router={router}><Layout/></RouterProvider>
 );
