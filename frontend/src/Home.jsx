@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
+import Navbar from "./Pages/Navbar";
 
 const Home = () => {
+  <Navbar/>
   return (
     <div className="bg-gray-900 text-white min-h-screen">
       {/* Carousel Section */}

@@ -7,6 +7,7 @@ import Register from "./Pages/Register.jsx";
 import Login from "./Pages/Login.jsx";
 import Products from "./Pages/Products.jsx";
 import Cart from "./Pages/Cart.jsx";
+import Navbar from "./Pages/Navbar.jsx";
 
 const router = createBrowserRouter([
   {

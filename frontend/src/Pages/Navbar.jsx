@@ -12,25 +12,25 @@ const Navbar = () => {
         <div className="hidden md:flex space-x-6">
           <a
             href="#"
-            className="text-gray-300 hover:text-yellow-400 transition-colors"
+            className="text-gray-300 hover:text-yellow-400 transition-colors hover:underline-offset-6"
           >
             Home
           </a>
           <a
             href="#"
-            className="text-gray-300 hover:text-yellow-400 transition-colors"
+            className="text-gray-300 hover:text-yellow-400 transition-colors hover:underline-offset-6"
           >
             Shop
           </a>
           <a
             href="#"
-            className="text-gray-300 hover:text-yellow-400 transition-colors"
+            className="text-gray-300 hover:text-yellow-400 transition-colors hover:underline-offset-6"
           >
             About
           </a>
           <a
             href="#"
-            className="text-gray-300 hover:text-yellow-400 transition-colors"
+            className="text-gray-300 hover:text-yellow-400 transition-colors hover:underline-offset-6"
           >
             Contact
           </a>
