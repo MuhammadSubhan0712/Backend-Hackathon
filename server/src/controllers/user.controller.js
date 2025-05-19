@@ -47,20 +47,16 @@ const registerUser = async (req, res) => {
       data: createUser,
     });
 
-    const sendEmail = async (req, res) => {
-      let testAccount = await nodemailer.createTestAccount();
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: process.env.SMTP_PORT,
+      auth:{
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    });
       
-      const transporter = await nodemailer.createTransport({
-          host: 'smtp.ethereal.email',
-          port: 587,
-          secure:false,
-          auth: {
-              user: 'kyra.robel79@ethereal.email',
-              pass: 'Kg3HdJB3xnmVb5VcK2'
-          }
-      });
-      
-          const info = await transporter.sendMail({
+          const info = transporter.sendMail({
             from: '"😊 Kyra Robel " <kyra.robel79@ethereal.email>',
             to: "muhammadsubhan0712@gmail.com", 
             subject: "Welcome",
@@ -70,7 +66,7 @@ const registerUser = async (req, res) => {
         
           console.log("Message sent: %s", info.messageId);
           res.send("email sent" , info);
-        };
+        
   } catch (error) {
     res.json({message:"Error creating user"},error);
   } 
@@ -106,9 +102,11 @@ const loginUser = async (req, res) => {
     });
     return;
   }
+  const refreshToken = generateRefreshToken(user);
+
   try {
   // Cookies
-  res.cookie("refreshToken", refreshToken, { http: true, secure: false });
+  res.cookie("refreshToken", refreshToken, { http: true, secure: process.env.NODE_ENV === "production" });
   res.status(200).json({
     message: "User LoggedIn Successfully",
     accessToken: generateAccessToken(user),

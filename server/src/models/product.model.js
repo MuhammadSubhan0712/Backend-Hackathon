@@ -15,26 +15,25 @@ const productSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+
     image: {
       type: String,
-      // required: true,
+      required: true,
     },
     user: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Users",
-        // required: true,
       },
     ],
     orderItems: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Orders",
-        // required: true,
       },
     ],
   },
-  { timeStamps: true }
+  { timestamps: true }
 );
 
 export default mongoose.model("Products", productSchema);

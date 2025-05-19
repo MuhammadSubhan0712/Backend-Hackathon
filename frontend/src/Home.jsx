@@ -1,10 +1,13 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
-import Navbar from "./Pages/Navbar";
+import Navbar from "./components/Navbar";
+
 
 const Home = () => {
-  <Navbar/>
+ 
   return (
+    <>
+    <Navbar/>
     <div className="bg-gray-900 text-white min-h-screen">
       {/* Carousel Section */}
       <div className="relative w-full h-[50vh] bg-gray-800 overflow-hidden">
@@ -66,6 +69,7 @@ const Home = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

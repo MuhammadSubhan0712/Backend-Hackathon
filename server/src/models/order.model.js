@@ -1,25 +1,23 @@
 import mongoose from "mongoose";
 
-
 const orderSchema = new mongoose.Schema({
-  user: [
+  user: 
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Users",
       required: true,
     },
-  ],
 
-  product: [
+  product: 
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Products",
       required: true,
     },
-  ],
+  
   totalPrice: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Products",
+    // type: mongoose.Schema.Types.ObjectId,
+    ref: Number,
     required: true,
   },
   orderDate: {
@@ -29,6 +27,7 @@ const orderSchema = new mongoose.Schema({
   status: {
     type: String,
     required: true,
+    enum: ["pending", "shipped", "delivered"],
   },
 });
 
