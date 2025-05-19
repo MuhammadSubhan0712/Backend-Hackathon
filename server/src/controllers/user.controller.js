@@ -20,7 +20,7 @@ const generateRefreshToken = (user) => {
 
 // To register the User
 const registerUser = async (req, res) => {
-  const { username , email, password } = req.body;
+  const { username, email, password } = req.body;
 
   if (!username || !email || !password) {
     res.status(400).json({
@@ -50,26 +50,25 @@ const registerUser = async (req, res) => {
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: process.env.SMTP_PORT,
-      auth:{
+      auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
       },
     });
-      
-          const info = transporter.sendMail({
-            from: '"😊 Kyra Robel " <kyra.robel79@ethereal.email>',
-            to: "muhammadsubhan0712@gmail.com", 
-            subject: "Welcome",
-            text: "Welcome to the HACKATHON",
-            html: "<b>Hello Hackathon</b>", 
-          });
-        
-          console.log("Message sent: %s", info.messageId);
-          res.send("email sent" , info);
-        
+
+    const info = transporter.sendMail({
+      from: '"😊 Kyra Robel " <kyra.robel79@ethereal.email>',
+      to: "muhammadsubhan0712@gmail.com",
+      subject: "Welcome",
+      text: "Welcome to the HACKATHON",
+      html: "<b>Hello Hackathon</b>",
+    });
+
+    console.log("Message sent: %s", info.messageId);
+    res.send("email sent", info);
   } catch (error) {
-    res.json({message:"Error creating user"},error);
-  } 
+    res.json({ message: "Error creating user" }, error);
+  }
 };
 
 // To Login User
@@ -105,19 +104,21 @@ const loginUser = async (req, res) => {
   const refreshToken = generateRefreshToken(user);
 
   try {
-  // Cookies
-  res.cookie("refreshToken", refreshToken, { http: true, secure: process.env.NODE_ENV === "production" });
-  res.status(200).json({
-    message: "User LoggedIn Successfully",
-    accessToken: generateAccessToken(user),
-    refreshToken: generateRefreshToken(user),
-    data: user,
-  });
+    // Cookies
+    res.cookie("refreshToken", refreshToken, {
+      http: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+    });
+    res.status(200).json({
+      message: "User LoggedIn Successfully",
+      accessToken: generateAccessToken(user),
+      refreshToken: generateRefreshToken(user),
+      data: user,
+    });
   } catch (error) {
-    res.json({message:"Error logging user"},error);
+    res.json({ message: "Error logging user" }, error);
   }
-
-
 };
 
 // To logout user

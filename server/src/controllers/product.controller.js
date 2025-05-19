@@ -95,7 +95,7 @@ export const getAllProducts = async (req, res) => {
   const skip = (page - 1) * limit;
 
   try {
-    const products = await Products.find({}).skip(skip).limit(limit);
+    const products = await Products.find({}).select("-__v").skip(skip).limit(limit).lean(); //For faster read-only queries
     res.status(200).json({
       message: "All products ==>",
       data: products,
