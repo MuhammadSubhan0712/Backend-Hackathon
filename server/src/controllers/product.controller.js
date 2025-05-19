@@ -120,7 +120,7 @@ export const getSingleProduct = async (req, res) => {
       res.status(400).json({ message: "No such Product found" });
       return;
     }
-    res.json(200).json({
+    res.status(200).json({
       message: "Single Product =>",
       product,
     });
