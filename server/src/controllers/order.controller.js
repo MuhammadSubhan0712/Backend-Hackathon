@@ -28,7 +28,7 @@ export const addOrder = async (req, res) => {
 
     const order = await Orders.create({
       products,
-      price: totalPrice,
+      totalPrice,
       user: req.user.id,
     });
     res.status(200).json({
