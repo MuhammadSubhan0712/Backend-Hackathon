@@ -44,7 +44,25 @@ const Navbar = () => {
           <button
             className="text-yellow-400 hover:text-yellow-500 focus:outline-none"
             aria-label="Toggle Menu"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
+              {/* Mobile Menu: */}
+              {mobileMenuOpen && (
+                  <div className="md:hidden bg-gray-800 px-4 py-2 space-y-2">
+          {/* Mobile menu items */}
+            <div className="flex flex-col justify-center items-center">
+          {['Home', 'Shop', 'About', 'Contact'].map((item) => (
+            <Link
+              key={item}
+              to={`/${item.toLowerCase()}`}
+              className="text-gray-300 hover:text-yellow-400 transition-colors font-medium py-2 px-1 border-b-2 border-transparent hover:border-yellow-400"
+            >
+              {item}
+            </Link>
+          ))}
+        </div>
+        </div>
+              )}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -58,6 +76,7 @@ const Navbar = () => {
                 strokeLinejoin="round"
                 d="M4 6h16M4 12h16m-7 6h7"
               />
+            
             </svg>
           </button>
         </div>
