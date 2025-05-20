@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
+
+  const [mobileMenuOpen , setMobileMenuOpen ] = useState(false);
   return (
     <nav className="bg-gray-900 text-white">
       <div className="container mx-auto flex items-center justify-between py-4 px-6">
@@ -9,37 +12,32 @@ const Navbar = () => {
         <div className="text-2xl font-bold text-yellow-400">XD Shop</div>
 
         {/* Navigation Links */}
-        <div className="hidden md:flex space-x-6">
-          <a
-            href="#"
-            className="text-gray-300 hover:text-yellow-400 transition-colors hover:underline-offset-6"
-          >
-            Home
-          </a>
-          <a
-            href="#"
-            className="text-gray-300 hover:text-yellow-400 transition-colors hover:underline-offset-6"
-          >
-            Shop
-          </a>
-          <a
-            href="#"
-            className="text-gray-300 hover:text-yellow-400 transition-colors hover:underline-offset-6"
-          >
-            About
-          </a>
-          <a
-            href="#"
-            className="text-gray-300 hover:text-yellow-400 transition-colors hover:underline-offset-6"
-          >
-            Contact
-          </a>
+         <div className="hidden md:flex space-x-8">
+          {['Home', 'Shop', 'About', 'Contact'].map((item) => (
+            <Link
+              key={item}
+              to={`/${item.toLowerCase()}`}
+              className="text-gray-300 hover:text-yellow-400 transition-colors font-medium py-2 px-1 border-b-2 border-transparent hover:border-yellow-400"
+            >
+              {item}
+            </Link>
+          ))}
         </div>
 
-        {/* Call-to-Action Button */}
-        <Button className="hidden md:block bg-yellow-400 text-gray-900 hover:bg-yellow-500">
-          Sign Up
-        </Button>
+           {/* Auth Buttons */}
+        <div className="hidden md:flex space-x-4">
+          <Link to="/login">
+            <Button variant="outline" className="text-yellow-400 border-yellow-400 hover:bg-yellow-400/10">
+              Login
+            </Button>
+          </Link>
+          <Link to="/register">
+            <Button className="bg-yellow-400 text-gray-900 hover:bg-yellow-500">
+              Sign Up
+            </Button>
+          </Link>
+        </div>
+
 
         {/* Mobile Menu Icon */}
         <div className="md:hidden flex items-center">
@@ -56,7 +54,7 @@ const Navbar = () => {
               className="w-6 h-6"
             >
               <path
-                strokeLinecap="round"
+                 strokeLinecap="round"
                 strokeLinejoin="round"
                 d="M4 6h16M4 12h16m-7 6h7"
               />
