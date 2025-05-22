@@ -18,10 +18,10 @@ const orderSchema = new mongoose.Schema({
   totalPrice: {
     // type: mongoose.Schema.Types.ObjectId,
     ref: Number,
-    required: true,
+    // required: true,
   },
   orderDate: {
-    type:Date,
+    type: Date,
     default: Date.now
   },
   status: {
