@@ -31,7 +31,7 @@ const Cart = () => {
                   className="bg-gray-800 rounded-lg p-4 flex items-center">
                   <img
                     src={item.image}
-                    alt={item - title}
+                    alt={item.title}
                     className="w-20 h-20 object-cover rounded"
                   />
 

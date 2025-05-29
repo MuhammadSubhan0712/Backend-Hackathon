@@ -38,7 +38,7 @@ const Contact = () => {
                 <div>
                   <h3 className="text-xl font-bold mb-1">Our Location</h3>
                   <p className="text-gray-400">
-                    123 Tech Street, Silicon Valley, CA 94025
+                    Gulshan e Iqbal block-15A, Karachi, Pakistan
                   </p>
                 </div>
               </div>

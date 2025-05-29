@@ -107,7 +107,6 @@ export const getAllProducts = async (req, res) => {
 };
 
 // Get single Product
-
 export const getSingleProduct = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {

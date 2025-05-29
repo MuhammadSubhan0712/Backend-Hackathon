@@ -18,8 +18,6 @@ app.get("/", (req, res) => {
   res.send("Ready to give (!)HACKATHON(!)");
 });
 
-
-
 app.use("/api/v1" , userRouter);
 app.use("/api/v1" , productRouter);
 app.use("/api/v1" , orderRouter);
